@@ -1,8 +1,8 @@
 import {parser} from "lezer-javascript"
 import {LezerLanguage, LanguageSupport,
-        flatIndent, continuedIndent, indentNodeProp, foldNodeProp, delimitedIndent} from "@codemirror/next/language"
-import {styleTags, tags as t} from "@codemirror/next/highlight"
-import {completeFromList, ifNotIn} from "@codemirror/next/autocomplete"
+        flatIndent, continuedIndent, indentNodeProp, foldNodeProp, delimitedIndent} from "@codemirror/language"
+import {styleTags, tags as t} from "@codemirror/highlight"
+import {completeFromList, ifNotIn} from "@codemirror/autocomplete"
 import {snippets} from "./snippets"
 
 /// A language provider based on the [Lezer JavaScript

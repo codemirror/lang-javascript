@@ -1,7 +1,7 @@
 import ist from "ist"
-import {EditorState} from "@codemirror/next/state"
-import {javascriptLanguage} from "@codemirror/next/lang-javascript"
-import {ensureSyntaxTree} from "@codemirror/next/language"
+import {EditorState} from "@codemirror/state"
+import {javascriptLanguage} from "@codemirror/lang-javascript"
+import {ensureSyntaxTree} from "@codemirror/language"
 import {Tree} from "lezer"
 
 function s(doc: string) {

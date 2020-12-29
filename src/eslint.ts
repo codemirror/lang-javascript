@@ -1,6 +1,6 @@
-import {Diagnostic} from "@codemirror/next/lint"
-import {Text} from "@codemirror/next/state"
-import {EditorView} from "@codemirror/next/view"
+import {Diagnostic} from "@codemirror/lint"
+import {Text} from "@codemirror/state"
+import {EditorView} from "@codemirror/view"
 import {javascriptLanguage} from "./javascript"
 
 /// Connects an [ESLint](https://eslint.org/) linter to CodeMirror's
