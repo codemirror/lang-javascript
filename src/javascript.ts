@@ -47,6 +47,8 @@ export const javascriptLanguage = LezerLanguage.define({
         Label: t.labelName,
         PropertyName: t.propertyName,
         "CallExpression/MemberExpression/PropertyName": t.function(t.propertyName),
+        "FunctionDeclaration/VariableDefinition": t.function(t.definition(t.variableName)),
+        "ClassDeclaration/VariableDefinition": t.definition(t.className),
         PropertyNameDefinition: t.definition(t.propertyName),
         UpdateOp: t.updateOperator,
         LineComment: t.lineComment,
