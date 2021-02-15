@@ -21,7 +21,18 @@ export const javascriptLanguage = LezerLanguage.define({
         },
         Block: delimitedIndent({closing: "}"}),
         "TemplateString BlockComment": () => -1,
-        "Statement Property": continuedIndent({except: /^{/})
+        "Statement Property": continuedIndent({except: /^{/}),
+        JSXElement(context) {
+          let closed = /^\s*<\//.test(context.textAfter)
+          return context.lineIndent(context.state.doc.lineAt(context.node.from)) + (closed ? 0 : context.unit)
+        },
+        JSXEscape(context) {
+          let closed = /\s*\}/.test(context.textAfter)
+          return context.lineIndent(context.state.doc.lineAt(context.node.from)) + (closed ? 0 : context.unit)
+        },
+        "JSXOpenTag JSXSelfClosingTag"(context) {
+          return context.column(context.node.from) + context.unit
+        }
       }),
       foldNodeProp.add({
         "Block ClassBody SwitchBody EnumBody ObjectExpression ArrayExpression"(tree) {

@@ -1,12 +1,12 @@
 import ist from "ist"
 import {EditorState} from "@codemirror/state"
 import {getIndentation} from "@codemirror/language"
-import {javascriptLanguage} from "@codemirror/lang-javascript"
+import {javascript} from "@codemirror/lang-javascript"
 
-function check(code: string) {
+function check(code: string, options: any = {}) {
   return () => {
     code = /^\n*([^]*)/.exec(code)![1]
-    let state = EditorState.create({doc: code, extensions: [javascriptLanguage]})
+    let state = EditorState.create({doc: code, extensions: [javascript(options).language]})
     for (let pos = 0, lines = code.split("\n"), i = 0; i < lines.length; i++) {
       let line = lines[i], indent = /^\s*/.exec(line)![0].length
       ist(`${getIndentation(state, pos)} (${i + 1})`, `${indent} (${i + 1})`)
@@ -153,4 +153,15 @@ for (;;)
   else
     baz()
 `))
+
+  it("indents JSX constructs", check(`
+let y = <body>
+  <div class="a"
+    lang="it">
+    What?
+  </div>
+  <img src={
+    foo
+  }/>
+</body>`, {jsx: true}))
 })
