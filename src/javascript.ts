@@ -20,6 +20,7 @@ export const javascriptLanguage = LezerLanguage.define({
           return context.baseIndent + (closed ? 0 : isCase ? 1 : 2) * context.unit
         },
         Block: delimitedIndent({closing: "}"}),
+        ArrowFunction: cx => cx.baseIndent + cx.unit,
         "TemplateString BlockComment": () => -1,
         "Statement Property": continuedIndent({except: /^{/}),
         JSXElement(context) {
