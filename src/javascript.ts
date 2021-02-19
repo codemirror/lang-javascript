@@ -1,6 +1,7 @@
 import {parser} from "lezer-javascript"
 import {LezerLanguage, LanguageSupport,
-        flatIndent, continuedIndent, indentNodeProp, foldNodeProp, delimitedIndent} from "@codemirror/language"
+        delimitedIndent, flatIndent, continuedIndent, indentNodeProp,
+        foldNodeProp, foldInside} from "@codemirror/language"
 import {styleTags, tags as t} from "@codemirror/highlight"
 import {completeFromList, ifNotIn} from "@codemirror/autocomplete"
 import {snippets} from "./snippets"
@@ -36,9 +37,7 @@ export const javascriptLanguage = LezerLanguage.define({
         }
       }),
       foldNodeProp.add({
-        "Block ClassBody SwitchBody EnumBody ObjectExpression ArrayExpression"(tree) {
-          return {from: tree.from + 1, to: tree.to - 1}
-        },
+        "Block ClassBody SwitchBody EnumBody ObjectExpression ArrayExpression": foldInside,
         BlockComment(tree) { return {from: tree.from + 2, to: tree.to - 2} }
       }),
       styleTags({
