@@ -88,7 +88,7 @@ export const javascriptLanguage = LezerLanguage.define({
         JSXAttributeValue: t.string,
         JSXText: t.content,
         "JSXStartTag JSXStartCloseTag JSXSelfCloseEndTag JSXEndTag": t.angleBracket,
-        "JSXIdentifier JSXNameSpacedName": t.typeName,
+        "JSXIdentifier JSXNameSpacedName": t.tagName,
         "JSXAttribute/JSXIdentifier JSXAttribute/JSXNameSpacedName": t.propertyName
       })
     ]
