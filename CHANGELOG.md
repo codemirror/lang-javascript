@@ -1,3 +1,9 @@
+## 0.18.0 (2021-03-03)
+
+### Bug fixes
+
+Extend `indentOnInput` expression to cover closing JSX tags.
+
 ## 0.17.2 (2021-02-15)
 
 ### Bug fixes
