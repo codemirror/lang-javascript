@@ -1,4 +1,4 @@
-import {parser} from "lezer-javascript"
+import {parser} from "@lezer/javascript"
 import {LezerLanguage, LanguageSupport,
         delimitedIndent, flatIndent, continuedIndent, indentNodeProp,
         foldNodeProp, foldInside} from "@codemirror/language"

@@ -2,7 +2,7 @@ import ist from "ist"
 import {EditorState} from "@codemirror/state"
 import {javascriptLanguage} from "@codemirror/lang-javascript"
 import {ensureSyntaxTree} from "@codemirror/language"
-import {Tree} from "lezer"
+import {Tree} from "@lezer/common"
 
 function s(doc: string) {
   return EditorState.create({doc, extensions: [javascriptLanguage.extension]})
