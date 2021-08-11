@@ -1,5 +1,5 @@
 import {parser} from "@lezer/javascript"
-import {LezerLanguage, LanguageSupport,
+import {LRLanguage, LanguageSupport,
         delimitedIndent, flatIndent, continuedIndent, indentNodeProp,
         foldNodeProp, foldInside} from "@codemirror/language"
 import {styleTags, tags as t} from "@codemirror/highlight"
@@ -9,7 +9,7 @@ import {snippets} from "./snippets"
 /// A language provider based on the [Lezer JavaScript
 /// parser](https://github.com/lezer-parser/javascript), extended with
 /// highlighting and indentation information.
-export const javascriptLanguage = LezerLanguage.define({
+export const javascriptLanguage = LRLanguage.define({
   parser: parser.configure({
     props: [
       indentNodeProp.add({
