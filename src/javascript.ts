@@ -82,7 +82,7 @@ export const javascriptLanguage = LRLanguage.define({
         TypeName: t.typeName,
         TypeDefinition: t.definition(t.typeName),
         "type enum interface implements namespace module declare": t.definitionKeyword,
-        "abstract global privacy readonly": t.modifier,
+        "abstract global privacy readonly override": t.modifier,
         "is keyof unique infer": t.operatorKeyword,
 
         JSXAttributeValue: t.string,
