@@ -14,7 +14,7 @@ export const javascriptLanguage = LRLanguage.define({
     props: [
       indentNodeProp.add({
         IfStatement: continuedIndent({except: /^\s*({|else\b)/}),
-        TryStatement: continuedIndent({except: /^\s*({|catch|finally)\b/}),
+        TryStatement: continuedIndent({except: /^\s*({|catch\b|finally\b)/}),
         LabeledStatement: flatIndent,
         SwitchBody: context => {
           let after = context.textAfter, closed = /^\s*\}/.test(after), isCase = /^\s*(case|default)\b/.test(after)
