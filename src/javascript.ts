@@ -85,11 +85,11 @@ export const javascriptLanguage = LRLanguage.define({
         "abstract global privacy readonly override": t.modifier,
         "is keyof unique infer": t.operatorKeyword,
 
-        JSXAttributeValue: t.string,
+        JSXAttributeValue: t.attributeValue,
         JSXText: t.content,
         "JSXStartTag JSXStartCloseTag JSXSelfCloseEndTag JSXEndTag": t.angleBracket,
         "JSXIdentifier JSXNameSpacedName": t.tagName,
-        "JSXAttribute/JSXIdentifier JSXAttribute/JSXNameSpacedName": t.propertyName
+        "JSXAttribute/JSXIdentifier JSXAttribute/JSXNameSpacedName": t.attributeName
       })
     ]
   }),
