@@ -1,3 +1,9 @@
+## 0.19.2 (2021-09-23)
+
+### New features
+
+Use more specific highlighting tags for JSX attribute names and values.
+
 ## 0.19.1 (2021-08-11)
 
 ### Bug fixes
