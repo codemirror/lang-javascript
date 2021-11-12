@@ -1,3 +1,9 @@
+## 0.19.3 (2021-11-12)
+
+### Bug fixes
+
+Add styling for private properties.
+
 ## 0.19.2 (2021-09-23)
 
 ### New features
