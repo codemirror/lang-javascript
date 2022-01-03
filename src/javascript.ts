@@ -54,7 +54,7 @@ export const javascriptLanguage = LRLanguage.define({
         null: t.null,
         Star: t.modifier,
         VariableName: t.variableName,
-        "CallExpression/VariableName": t.function(t.variableName),
+        "CallExpression/VariableName TaggedTemplateExpression/VariableName": t.function(t.variableName),
         VariableDefinition: t.definition(t.variableName),
         Label: t.labelName,
         PropertyName: t.propertyName,
