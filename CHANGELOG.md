@@ -1,3 +1,9 @@
+## 0.19.4 (2022-01-03)
+
+### Bug fixes
+
+Fix highlighting of TypeScript private/public/protected keywords.
+
 ## 0.19.3 (2021-11-12)
 
 ### Bug fixes
