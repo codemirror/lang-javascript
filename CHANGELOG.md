@@ -1,3 +1,9 @@
+## 0.19.5 (2022-01-11)
+
+### Bug fixes
+
+Add the `function` highlight modifier to variables used in tagged template expressions.
+
 ## 0.19.4 (2022-01-03)
 
 ### Bug fixes
