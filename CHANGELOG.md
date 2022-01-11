@@ -1,3 +1,9 @@
+## 0.19.6 (2022-01-11)
+
+### Bug fixes
+
+Remove accidentally released unfinished changes.
+
 ## 0.19.5 (2022-01-11)
 
 ### Bug fixes
