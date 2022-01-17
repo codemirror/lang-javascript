@@ -79,6 +79,7 @@ export const javascriptLanguage = LRLanguage.define({
         "( )": t.paren,
         "[ ]": t.squareBracket,
         "{ }": t.brace,
+        "InterpolationStart InterpolationEnd": t.special(t.brace),
         ".": t.derefOperator,
         ", ;": t.separator,
 
