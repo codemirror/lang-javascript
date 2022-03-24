@@ -5,7 +5,6 @@ import {LRLanguage, LanguageSupport,
         foldNodeProp, foldInside, syntaxTree} from "@codemirror/language"
 import {EditorSelection, Text} from "@codemirror/state"
 import {EditorView} from "@codemirror/view"
-import {styleTags, tags as t} from "@codemirror/highlight"
 import {completeFromList, ifNotIn} from "@codemirror/autocomplete"
 import {snippets} from "./snippets"
 
@@ -42,61 +41,6 @@ export const javascriptLanguage = LRLanguage.define({
       foldNodeProp.add({
         "Block ClassBody SwitchBody EnumBody ObjectExpression ArrayExpression": foldInside,
         BlockComment(tree) { return {from: tree.from + 2, to: tree.to - 2} }
-      }),
-      styleTags({
-        "get set async static": t.modifier,
-        "for while do if else switch try catch finally return throw break continue default case": t.controlKeyword,
-        "in of await yield void typeof delete instanceof": t.operatorKeyword,
-        "let var const function class extends": t.definitionKeyword,
-        "import export from": t.moduleKeyword,
-        "with debugger as new": t.keyword,
-        TemplateString: t.special(t.string),
-        Super: t.atom,
-        BooleanLiteral: t.bool,
-        this: t.self,
-        null: t.null,
-        Star: t.modifier,
-        VariableName: t.variableName,
-        "CallExpression/VariableName TaggedTemplateExpression/VariableName": t.function(t.variableName),
-        VariableDefinition: t.definition(t.variableName),
-        Label: t.labelName,
-        PropertyName: t.propertyName,
-        PrivatePropertyName: t.special(t.propertyName),
-        "CallExpression/MemberExpression/PropertyName": t.function(t.propertyName),
-        "FunctionDeclaration/VariableDefinition": t.function(t.definition(t.variableName)),
-        "ClassDeclaration/VariableDefinition": t.definition(t.className),
-        PropertyDefinition: t.definition(t.propertyName),
-        PrivatePropertyDefinition: t.definition(t.special(t.propertyName)),
-        UpdateOp: t.updateOperator,
-        LineComment: t.lineComment,
-        BlockComment: t.blockComment,
-        Number: t.number,
-        String: t.string,
-        ArithOp: t.arithmeticOperator,
-        LogicOp: t.logicOperator,
-        BitOp: t.bitwiseOperator,
-        CompareOp: t.compareOperator,
-        RegExp: t.regexp,
-        Equals: t.definitionOperator,
-        "Arrow : Spread": t.punctuation,
-        "( )": t.paren,
-        "[ ]": t.squareBracket,
-        "{ }": t.brace,
-        "InterpolationStart InterpolationEnd": t.special(t.brace),
-        ".": t.derefOperator,
-        ", ;": t.separator,
-
-        TypeName: t.typeName,
-        TypeDefinition: t.definition(t.typeName),
-        "type enum interface implements namespace module declare": t.definitionKeyword,
-        "abstract global Privacy readonly override": t.modifier,
-        "is keyof unique infer": t.operatorKeyword,
-
-        JSXAttributeValue: t.attributeValue,
-        JSXText: t.content,
-        "JSXStartTag JSXStartCloseTag JSXSelfCloseEndTag JSXEndTag": t.angleBracket,
-        "JSXIdentifier JSXNameSpacedName": t.tagName,
-        "JSXAttribute/JSXIdentifier JSXAttribute/JSXNameSpacedName": t.attributeName
       })
     ]
   }),
