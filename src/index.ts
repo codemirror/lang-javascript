@@ -1,3 +1,3 @@
-export {javascriptLanguage, typescriptLanguage, jsxLanguage, tsxLanguage, javascript} from "./javascript"
+export {javascriptLanguage, typescriptLanguage, jsxLanguage, tsxLanguage, autoCloseTags, javascript} from "./javascript"
 export {snippets} from "./snippets"
 export {esLint} from "./eslint"
