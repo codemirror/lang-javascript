@@ -27,6 +27,7 @@ to communication around the project.
 @typescriptLanguage
 @jsxLanguage
 @tsxLanguage
+@autoCloseTags
 
 @snippets
 
