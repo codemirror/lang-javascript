@@ -141,8 +141,9 @@ const android = typeof navigator == "object" && /Android\b/.test(navigator.userA
 /// Extension that will automatically insert JSX close tags when a `>` or
 /// `/` is typed.
 export const autoCloseTags = EditorView.inputHandler.of((view, from, to, text) => {
-  if ((android ? view.composing : view.compositionStarted) || view.state.readOnly || from != to || (text != ">" && text != "/") ||
-      (!jsxLanguage.isActiveAt(view.state, from, -1)) && !tsxLanguage.isActiveAt(view.state, from, -1)) return false
+  if ((android ? view.composing : view.compositionStarted) || view.state.readOnly ||
+      from != to || (text != ">" && text != "/") ||
+      !javascriptLanguage.isActiveAt(view.state, from, -1)) return false
   let {state} = view
   let changes = state.changeByRange(range => {
     let {head} = range, around = syntaxTree(state).resolveInner(head, -1), name
