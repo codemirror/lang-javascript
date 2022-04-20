@@ -1,3 +1,9 @@
+## 0.20.0 (2022-04-20)
+
+### New features
+
+The new `autoCloseTags` extension (included by default in the `javascript` language extension when `jsx` is configured) finishes JSX closing tags when you type a `>` or `/` character.
+
 ## 0.19.7 (2022-01-28)
 
 ## 0.19.6 (2022-01-11)
