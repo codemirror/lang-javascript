@@ -62,6 +62,8 @@ export const jsxLanguage = javascriptLanguage.configure({dialect: "jsx"})
 /// Language provider for JSX + TypeScript.
 export const tsxLanguage = javascriptLanguage.configure({dialect: "jsx ts"})
 
+const keywords = "break case const continue default delete export extends false finally in instanceof let new return static super switch this throw true typeof var yield".split(" ").map(kw => ({label: kw, type: "keyword"}))
+
 /// JavaScript support. Includes [snippet](#lang-javascript.snippets)
 /// completion.
 export function javascript(config: {jsx?: boolean, typescript?: boolean} = {}) {
@@ -69,7 +71,7 @@ export function javascript(config: {jsx?: boolean, typescript?: boolean} = {}) {
     : config.typescript ? typescriptLanguage : javascriptLanguage
   return new LanguageSupport(lang, [
     javascriptLanguage.data.of({
-      autocomplete: ifNotIn(["LineComment", "BlockComment", "String"], completeFromList(snippets))
+      autocomplete: ifNotIn(["LineComment", "BlockComment", "String"], completeFromList(snippets.concat(keywords)))
     }),
     javascriptLanguage.data.of({
       autocomplete: localCompletionSource
