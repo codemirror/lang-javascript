@@ -1,3 +1,9 @@
+## 0.20.1 (2022-06-01)
+
+### New features
+
+`localCompletionSource` (included in the support extensions returned from `javascript`) now provides a way to complete locally-defined names.
+
 ## 0.20.0 (2022-04-20)
 
 ### New features
