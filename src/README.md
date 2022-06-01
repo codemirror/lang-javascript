@@ -30,5 +30,6 @@ to communication around the project.
 @autoCloseTags
 
 @snippets
+@localCompletionSource
 
 @esLint

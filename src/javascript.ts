@@ -7,6 +7,7 @@ import {EditorSelection, Text} from "@codemirror/state"
 import {EditorView} from "@codemirror/view"
 import {completeFromList, ifNotIn} from "@codemirror/autocomplete"
 import {snippets} from "./snippets"
+import {localCompletionSource} from "./complete"
 
 /// A language provider based on the [Lezer JavaScript
 /// parser](https://github.com/lezer-parser/javascript), extended with
@@ -69,6 +70,9 @@ export function javascript(config: {jsx?: boolean, typescript?: boolean} = {}) {
   return new LanguageSupport(lang, [
     javascriptLanguage.data.of({
       autocomplete: ifNotIn(["LineComment", "BlockComment", "String"], completeFromList(snippets))
+    }),
+    javascriptLanguage.data.of({
+      autocomplete: localCompletionSource
     }),
     config.jsx ? autoCloseTags : [],
   ])
