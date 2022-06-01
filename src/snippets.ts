@@ -18,9 +18,29 @@ export const snippets: readonly Completion[] = [
     detail: "of loop",
     type: "keyword"
   }),
+  snip("do {\n\t${}\n} while (${})", {
+    label: "do",
+    detail: "loop",
+    type: "keyword"
+  }),
+  snip("while (${}) {\n\t${}\n}", {
+    label: "while",
+    detail: "loop",
+    type: "keyword"
+  }),
   snip("try {\n\t${}\n} catch (${error}) {\n\t${}\n}", {
     label: "try",
+    detail: "/ catch block",
+    type: "keyword"
+  }),
+  snip("if (${}) {\n\t${}\n}", {
+    label: "if",
     detail: "block",
+    type: "keyword"
+  }),
+  snip("if (${}) {\n\t${}\n} else {\n\t${}\n}", {
+    label: "if",
+    detail: "/ else block",
     type: "keyword"
   }),
   snip("class ${name} {\n\tconstructor(${params}) {\n\t\t${}\n\t}\n}", {
