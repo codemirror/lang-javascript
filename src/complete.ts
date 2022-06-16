@@ -62,12 +62,19 @@ function getScope(doc: Text, node: SyntaxNode) {
 
 const Identifier = /^[\w$\xa1-\uffff][\w$\d\xa1-\uffff]*$/
 
+export const dontComplete = [
+  "TemplateString", "String", "RegExp",
+  "LineComment", "BlockComment",
+  "VariableDefinition", "TypeDefinition", "Label",
+  "PropertyDefinition", "PropertyName",
+  "PrivatePropertyDefinition", "PrivatePropertyName"
+]
+
 /// Completion source that looks up locally defined names in
 /// JavaScript code.
 export function localCompletionSource(context: CompletionContext): CompletionResult | null {
   let inner = syntaxTree(context.state).resolve(context.pos, -1)
-  if (inner.name == "TemplateString" || inner.name == "String" ||
-      inner.name == "LineComment" || inner.name == "BlockComment") return null
+  if (dontComplete.indexOf(inner.name) > -1) return null
   let isWord = inner.to - inner.from < 20 && Identifier.test(context.state.sliceDoc(inner.from, inner.to))
   if (!isWord && !context.explicit) return null
   let options: Completion[] = []
