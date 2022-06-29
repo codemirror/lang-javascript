@@ -73,7 +73,7 @@ export const dontComplete = [
 /// Completion source that looks up locally defined names in
 /// JavaScript code.
 export function localCompletionSource(context: CompletionContext): CompletionResult | null {
-  let inner = syntaxTree(context.state).resolve(context.pos, -1)
+  let inner = syntaxTree(context.state).resolveInner(context.pos, -1)
   if (dontComplete.indexOf(inner.name) > -1) return null
   let isWord = inner.to - inner.from < 20 && Identifier.test(context.state.sliceDoc(inner.from, inner.to))
   if (!isWord && !context.explicit) return null
