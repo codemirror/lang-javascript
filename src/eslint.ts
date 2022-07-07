@@ -48,7 +48,7 @@ function translateDiagnostic(input: any, doc: Text, offset: {line: number, col: 
     from: start,
     to: input.endLine != null && input.endColumn != 1 ? mapPos(input.endLine, input.endColumn, doc, offset) : start,
     message: input.message,
-    source: input.ruleId ? "jshint:" + input.ruleId : "jshint",
+    source: input.ruleId ? "eslint:" + input.ruleId : "eslint",
     severity: input.severity == 1 ? "warning" : "error",
   }
   if (input.fix) {
