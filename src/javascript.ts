@@ -25,7 +25,7 @@ export const javascriptLanguage = LRLanguage.define({
         },
         Block: delimitedIndent({closing: "}"}),
         ArrowFunction: cx => cx.baseIndent + cx.unit,
-        "TemplateString BlockComment": () => -1,
+        "TemplateString BlockComment": () => null,
         "Statement Property": continuedIndent({except: /^{/}),
         JSXElement(context) {
           let closed = /^\s*<\//.test(context.textAfter)
