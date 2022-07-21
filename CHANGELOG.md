@@ -1,3 +1,11 @@
+## 6.0.2 (2022-07-21)
+
+### Bug fixes
+
+Fix the `source` field in ESLint diagnostics to properly hold `"eslint"`.
+
+Fix (non-)auto indentation in template strings and comments.
+
 ## 6.0.1 (2022-06-29)
 
 ### Bug fixes
