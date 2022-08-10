@@ -2,14 +2,14 @@
 
 # @codemirror/lang-javascript [![NPM version](https://img.shields.io/npm/v/@codemirror/lang-javascript.svg)](https://www.npmjs.org/package/@codemirror/lang-javascript)
 
-[ [**WEBSITE**](https://codemirror.net/) | [**ISSUES**](https://github.com/codemirror/dev/issues) | [**FORUM**](https://discuss.codemirror.net/c/next/) | [**CHANGELOG**](https://github.com/codemirror/lang-javascript/blob/main/CHANGELOG.md) ]
+[ [**WEBSITE**](https://codemirror.net/6/) | [**ISSUES**](https://github.com/codemirror/dev/issues) | [**FORUM**](https://discuss.codemirror.net/c/next/) | [**CHANGELOG**](https://github.com/codemirror/lang-javascript/blob/main/CHANGELOG.md) ]
 
 This package implements JavaScript language support for the
-[CodeMirror](https://codemirror.net/) code editor.
+[CodeMirror](https://codemirror.net/6/) code editor.
 
-The [project page](https://codemirror.net/) has more information, a
-number of [examples](https://codemirror.net/examples/) and the
-[documentation](https://codemirror.net/docs/).
+The [project page](https://codemirror.net/6/) has more information, a
+number of [examples](https://codemirror.net/6/examples/) and the
+[documentation](https://codemirror.net/6/docs/).
 
 This code is released under an
 [MIT license](https://github.com/codemirror/lang-javascript/tree/main/LICENSE).
@@ -20,6 +20,7 @@ conduct](http://contributor-covenant.org/version/1/1/0/) that applies
 to communication around the project.
 
 ## API Reference
+
 <dl>
 <dt id="user-content-javascript">
   <code><strong><a href="#user-content-javascript">javascript</a></strong>(<a id="user-content-javascript^config" href="#user-content-javascript^config">config</a>&#8288;?: {jsx&#8288;?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, typescript&#8288;?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>} = {}) → <a href="https://codemirror.net/docs/ref#language.LanguageSupport">LanguageSupport</a></code></dt>
@@ -28,32 +29,44 @@ to communication around the project.
 completion.</p>
 </dd>
 <dt id="user-content-javascriptlanguage">
-  <code><strong><a href="#user-content-javascriptlanguage">javascriptLanguage</a></strong>: <a href="https://codemirror.net/docs/ref#language.LezerLanguage">LezerLanguage</a></code></dt>
+  <code><strong><a href="#user-content-javascriptlanguage">javascriptLanguage</a></strong>: <a href="https://codemirror.net/docs/ref#language.LRLanguage">LRLanguage</a></code></dt>
 
 <dd><p>A language provider based on the <a href="https://github.com/lezer-parser/javascript">Lezer JavaScript
 parser</a>, extended with
 highlighting and indentation information.</p>
 </dd>
 <dt id="user-content-typescriptlanguage">
-  <code><strong><a href="#user-content-typescriptlanguage">typescriptLanguage</a></strong>: <a href="https://codemirror.net/docs/ref#language.LezerLanguage">LezerLanguage</a></code></dt>
+  <code><strong><a href="#user-content-typescriptlanguage">typescriptLanguage</a></strong>: <a href="https://codemirror.net/docs/ref#language.LRLanguage">LRLanguage</a></code></dt>
 
 <dd><p>A language provider for TypeScript.</p>
 </dd>
 <dt id="user-content-jsxlanguage">
-  <code><strong><a href="#user-content-jsxlanguage">jsxLanguage</a></strong>: <a href="https://codemirror.net/docs/ref#language.LezerLanguage">LezerLanguage</a></code></dt>
+  <code><strong><a href="#user-content-jsxlanguage">jsxLanguage</a></strong>: <a href="https://codemirror.net/docs/ref#language.LRLanguage">LRLanguage</a></code></dt>
 
 <dd><p>Language provider for JSX.</p>
 </dd>
 <dt id="user-content-tsxlanguage">
-  <code><strong><a href="#user-content-tsxlanguage">tsxLanguage</a></strong>: <a href="https://codemirror.net/docs/ref#language.LezerLanguage">LezerLanguage</a></code></dt>
+  <code><strong><a href="#user-content-tsxlanguage">tsxLanguage</a></strong>: <a href="https://codemirror.net/docs/ref#language.LRLanguage">LRLanguage</a></code></dt>
 
 <dd><p>Language provider for JSX + TypeScript.</p>
+</dd>
+<dt id="user-content-autoclosetags">
+  <code><strong><a href="#user-content-autoclosetags">autoCloseTags</a></strong>: <a href="https://codemirror.net/docs/ref#state.Extension">Extension</a></code></dt>
+
+<dd><p>Extension that will automatically insert JSX close tags when a <code>&gt;</code> or
+<code>/</code> is typed.</p>
 </dd>
 <dt id="user-content-snippets">
   <code><strong><a href="#user-content-snippets">snippets</a></strong>: readonly <a href="https://codemirror.net/docs/ref#autocomplete.Completion">Completion</a>[]</code></dt>
 
 <dd><p>A collection of JavaScript-related
 <a href="https://codemirror.net/docs/ref/#autocomplete.snippet">snippets</a>.</p>
+</dd>
+<dt id="user-content-localcompletionsource">
+  <code><strong><a href="#user-content-localcompletionsource">localCompletionSource</a></strong>(<a id="user-content-localcompletionsource^context" href="#user-content-localcompletionsource^context">context</a>: <a href="https://codemirror.net/docs/ref#autocomplete.CompletionContext">CompletionContext</a>) → <a href="https://codemirror.net/docs/ref#autocomplete.CompletionResult">CompletionResult</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></code></dt>
+
+<dd><p>Completion source that looks up locally defined names in
+JavaScript code.</p>
 </dd>
 <dt id="user-content-eslint">
   <code><strong><a href="#user-content-eslint">esLint</a></strong>(<a id="user-content-eslint^eslint" href="#user-content-eslint^eslint">eslint</a>: any, <a id="user-content-eslint^config" href="#user-content-eslint^config">config</a>&#8288;?: any) → fn(<a id="user-content-eslint^returns^view" href="#user-content-eslint^returns^view">view</a>: <a href="https://codemirror.net/docs/ref#view.EditorView">EditorView</a>) → <a href="https://codemirror.net/docs/ref#lint.Diagnostic">Diagnostic</a>[]</code></dt>
@@ -71,4 +84,3 @@ and
 packages may help with that.</p>
 </dd>
 </dl>
-
