@@ -11,10 +11,10 @@ import {javascriptLanguage} from "./javascript"
 /// to create a JavaScript linting extension.
 ///
 /// Note that ESLint targets node, and is tricky to run in the
-/// browser. The [eslint4b](https://github.com/mysticatea/eslint4b)
-/// and
-/// [eslint4b-prebuilt](https://github.com/marijnh/eslint4b-prebuilt/)
-/// packages may help with that.
+/// browser. The
+/// [eslint-linter-browserify](https://github.com/UziTech/eslint-linter-browserify)
+/// package may help with that (see
+/// [example](https://github.com/UziTech/eslint-linter-browserify/blob/master/example/script.js)).
 export function esLint(eslint: any, config?: any) {
   if (!config) {
     config = {

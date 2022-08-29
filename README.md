@@ -78,7 +78,9 @@ class, and <code>config</code> an optional ESLint configuration. The return
 value of this function can be passed to <a href="https://codemirror.net/docs/ref/#lint.linter"><code>linter</code></a>
 to create a JavaScript linting extension.</p>
 <p>Note that ESLint targets node, and is tricky to run in the
-browser. The <a href="https://github.com/UziTech/eslint-linter-browserify">eslint-linter-browserify</a>
-package may help with that (see <a href="https://github.com/UziTech/eslint-linter-browserify/blob/master/example/script.js">example</a>).</p>
+browser. The
+<a href="https://github.com/UziTech/eslint-linter-browserify">eslint-linter-browserify</a>
+package may help with that (see
+<a href="https://github.com/UziTech/eslint-linter-browserify/blob/master/example/script.js">example</a>).</p>
 </dd>
 </dl>
