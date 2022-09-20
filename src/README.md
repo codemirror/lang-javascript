@@ -31,5 +31,7 @@ to communication around the project.
 
 @snippets
 @localCompletionSource
+@completionPath
+@scopeCompletionSource
 
 @esLint

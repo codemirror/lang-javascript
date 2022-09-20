@@ -1,5 +1,5 @@
 import {NodeWeakMap, SyntaxNodeRef, SyntaxNode, IterMode} from "@lezer/common"
-import {Completion, CompletionContext, CompletionResult} from "@codemirror/autocomplete"
+import {Completion, CompletionContext, CompletionResult, CompletionSource} from "@codemirror/autocomplete"
 import {syntaxTree} from "@codemirror/language"
 import {Text} from "@codemirror/state"
 
@@ -75,7 +75,8 @@ export const dontComplete = [
 export function localCompletionSource(context: CompletionContext): CompletionResult | null {
   let inner = syntaxTree(context.state).resolveInner(context.pos, -1)
   if (dontComplete.indexOf(inner.name) > -1) return null
-  let isWord = inner.to - inner.from < 20 && Identifier.test(context.state.sliceDoc(inner.from, inner.to))
+  let isWord = inner.name == "VariableName" ||
+    inner.to - inner.from < 20 && Identifier.test(context.state.sliceDoc(inner.from, inner.to))
   if (!isWord && !context.explicit) return null
   let options: Completion[] = []
   for (let pos: SyntaxNode | null = inner; pos; pos = pos.parent) {
@@ -85,5 +86,93 @@ export function localCompletionSource(context: CompletionContext): CompletionRes
     options,
     from: isWord ? inner.from : context.pos,
     validFor: Identifier
+  }
+}
+
+function pathFor(read: (node: SyntaxNode) => string, member: SyntaxNode, name: string) {
+  let path = []
+  for (;;) {
+    let obj = member.firstChild, prop
+    if (obj?.name == "VariableName") {
+      path.push(read(obj))
+      return {path: path.reverse(), name}
+    } else if (obj?.name == "MemberExpression" && (prop = obj.lastChild)?.name == "PropertyName") {
+      path.push(read(prop!))
+      member = obj
+    } else {
+      return null
+    }
+  }
+}
+
+/// Helper function for defining JavaScript completion sources. It
+/// returns the completable name and object path for a completion
+/// context, or null if no name/property completion should happen at
+/// that position. For example, when completing after `a.b.c` it will
+/// return `{path: ["a", "b"], name: "c"}`. When completing after `x`
+/// it will return `{path: [], name: "x"}`. When not in a property or
+/// name, it will return null if `context.explicit` is false, and
+/// `{path: [], name: ""}` otherwise.
+export function completionPath(context: CompletionContext): {path: readonly string[], name: string} | null {
+  let read = (node: SyntaxNode) => context.state.doc.sliceString(node.from, node.to)
+  let inner = syntaxTree(context.state).resolveInner(context.pos, -1)
+  if (inner.name == "PropertyName") {
+    return pathFor(read, inner.parent!, read(inner))
+  } else if (dontComplete.indexOf(inner.name) > -1) {
+    return null
+  } else if (inner.name == "VariableName" || inner.to - inner.from < 20 && Identifier.test(read(inner))) {
+    return {path: [], name: read(inner)}
+  } else if (inner.name == "." && inner.parent!.name == "MemberExpression") {
+    return pathFor(read, inner.parent!, "")
+  } else if (inner.name == "MemberExpression") {
+    return pathFor(read, inner, "")
+  } else {
+    return context.explicit ? {path: [], name: ""} : null
+  }
+}
+
+function enumeratePropertyCompletions(obj: any, top: boolean): readonly Completion[] {
+  let options = [], seen: Set<string> = new Set
+  for (let depth = 0;; depth++) {
+    for (let name of (Object.getOwnPropertyNames || Object.keys)(obj)) {
+      if (seen.has(name)) continue
+      seen.add(name)
+      let value
+      try { value = obj[name] }
+      catch(_) { continue }
+      options.push({
+        label: name,
+        type: typeof value == "function" ? (/^[A-Z]/.test(name) ? "class" : top ? "function" : "method")
+          : top ? "variable" : "property",
+        boost: -depth
+      })
+    }
+    let next = Object.getPrototypeOf(obj)
+    if (!next) return options
+    obj = next
+  }
+}
+
+/// Defines a [completion source](#autocomplete.CompletionSource) that
+/// completes from the given scope object (for example `globalThis`).
+/// Will enter properties of the object when completing properties on
+/// a directly-named path.
+export function scopeCompletionSource(scope: any): CompletionSource {
+  let cache: Map<any, readonly Completion[]> = new Map
+  return (context: CompletionContext) => {
+    let path = completionPath(context)
+    if (!path) return null
+    let target = scope
+    for (let step of path.path) {
+      target = target[step]
+      if (!target) return null
+    }
+    let options = cache.get(target)
+    if (!options) cache.set(target, options = enumeratePropertyCompletions(target, !path.path.length))
+    return {
+      from: context.pos - path.name.length,
+      options,
+      validFor: Identifier
+    }
   }
 }
