@@ -122,7 +122,7 @@ export function completionPath(context: CompletionContext): {path: readonly stri
     return null
   } else if (inner.name == "VariableName" || inner.to - inner.from < 20 && Identifier.test(read(inner))) {
     return {path: [], name: read(inner)}
-  } else if (inner.name == "." && inner.parent!.name == "MemberExpression") {
+  } else if ((inner.name == "." || inner.name == "?.") && inner.parent!.name == "MemberExpression") {
     return pathFor(read, inner.parent!, "")
   } else if (inner.name == "MemberExpression") {
     return pathFor(read, inner, "")
