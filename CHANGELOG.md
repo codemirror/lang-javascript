@@ -1,3 +1,11 @@
+## 6.1.0 (2022-09-20)
+
+### New features
+
+The `completionPath` helper can now be used to find the object path to complete at a given position.
+
+`scopeCompletionSource` provides a completion source based on a scope object.
+
 ## 6.0.2 (2022-07-21)
 
 ### Bug fixes
