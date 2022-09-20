@@ -68,6 +68,26 @@ highlighting and indentation information.</p>
 <dd><p>Completion source that looks up locally defined names in
 JavaScript code.</p>
 </dd>
+<dt id="user-content-completionpath">
+  <code><strong><a href="#user-content-completionpath">completionPath</a></strong>(<a id="user-content-completionpath^context" href="#user-content-completionpath^context">context</a>: <a href="https://codemirror.net/docs/ref#autocomplete.CompletionContext">CompletionContext</a>) → {path: readonly <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>[], name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>} | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></code></dt>
+
+<dd><p>Helper function for defining JavaScript completion sources. It
+returns the completable name and object path for a completion
+context, or null if no name/property completion should happen at
+that position. For example, when completing after <code>a.b.c</code> it will
+return <code>{path: [&quot;a&quot;, &quot;b&quot;], name: &quot;c&quot;}</code>. When completing after <code>x</code>
+it will return <code>{path: [], name: &quot;x&quot;}</code>. When not in a property or
+name, it will return null if <code>context.explicit</code> is false, and
+<code>{path: [], name: &quot;&quot;}</code> otherwise.</p>
+</dd>
+<dt id="user-content-scopecompletionsource">
+  <code><strong><a href="#user-content-scopecompletionsource">scopeCompletionSource</a></strong>(<a id="user-content-scopecompletionsource^scope" href="#user-content-scopecompletionsource^scope">scope</a>: any) → <a href="https://codemirror.net/docs/ref#autocomplete.CompletionSource">CompletionSource</a></code></dt>
+
+<dd><p>Defines a <a href="https://codemirror.net/docs/ref/#autocomplete.CompletionSource">completion source</a> that
+completes from the given scope object (for example <code>globalThis</code>).
+Will enter properties of the object when completing properties on
+a directly-named path.</p>
+</dd>
 <dt id="user-content-eslint">
   <code><strong><a href="#user-content-eslint">esLint</a></strong>(<a id="user-content-eslint^eslint" href="#user-content-eslint^eslint">eslint</a>: any, <a id="user-content-eslint^config" href="#user-content-eslint^config">config</a>&#8288;?: any) → fn(<a id="user-content-eslint^returns^view" href="#user-content-eslint^returns^view">view</a>: <a href="https://codemirror.net/docs/ref#view.EditorView">EditorView</a>) → <a href="https://codemirror.net/docs/ref#lint.Diagnostic">Diagnostic</a>[]</code></dt>
 
