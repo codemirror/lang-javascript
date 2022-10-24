@@ -1,3 +1,9 @@
+## 6.1.1 (2022-10-24)
+
+### Bug fixes
+
+Make `completionPath` handle `?.` syntax.
+
 ## 6.1.0 (2022-09-20)
 
 ### New features
