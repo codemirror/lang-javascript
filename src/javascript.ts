@@ -13,6 +13,7 @@ import {localCompletionSource, dontComplete} from "./complete"
 /// parser](https://github.com/lezer-parser/javascript), extended with
 /// highlighting and indentation information.
 export const javascriptLanguage = LRLanguage.define({
+  name: "javascript",
   parser: parser.configure({
     props: [
       indentNodeProp.add({
@@ -54,13 +55,13 @@ export const javascriptLanguage = LRLanguage.define({
 })
 
 /// A language provider for TypeScript.
-export const typescriptLanguage = javascriptLanguage.configure({dialect: "ts"})
+export const typescriptLanguage = javascriptLanguage.configure({dialect: "ts"}, "typescript")
 
 /// Language provider for JSX.
 export const jsxLanguage = javascriptLanguage.configure({dialect: "jsx"})
 
 /// Language provider for JSX + TypeScript.
-export const tsxLanguage = javascriptLanguage.configure({dialect: "jsx ts"})
+export const tsxLanguage = javascriptLanguage.configure({dialect: "jsx ts"}, "typescript")
 
 const keywords = "break case const continue default delete export extends false finally in instanceof let new return static super switch this throw true typeof var yield".split(" ").map(kw => ({label: kw, type: "keyword"}))
 
