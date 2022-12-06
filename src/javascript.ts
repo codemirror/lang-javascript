@@ -81,10 +81,21 @@ export function javascript(config: {jsx?: boolean, typescript?: boolean} = {}) {
   ])
 }
 
+function findOpenTag(node: SyntaxNode) {
+  for (;;) {
+    if (node.name == "JSXOpenTag" || node.name == "JSXSelfClosingTag" || node.name == "JSXFragmentTag") return node
+    if (!node.parent) return null
+    node = node.parent
+  }
+}
+
 function elementName(doc: Text, tree: SyntaxNode | null | undefined, max = doc.length) {
-  if (!tree) return ""
-  let name = tree.getChild("JSXIdentifier")
-  return name ? doc.sliceString(name.from, Math.min(name.to, max)) : ""
+  for (let ch = tree?.firstChild; ch; ch = ch.nextSibling) {
+    if (ch.name == "JSXIdentifier" || ch.name == "JSXBuiltin" || ch.name == "JSXNamespacedName" ||
+        ch.name == "JSXMemberExpression")
+      return doc.sliceString(ch.from, Math.min(ch.to, max))
+  }
+  return ""
 }
 
 const android = typeof navigator == "object" && /Android\b/.test(navigator.userAgent)
@@ -101,15 +112,19 @@ export const autoCloseTags = EditorView.inputHandler.of((view, from, to, text) =
     if (around.name == "JSXStartTag") around = around.parent!
     if (text == ">" && around.name == "JSXFragmentTag") {
       return {range: EditorSelection.cursor(head + 1), changes: {from: head, insert: `><>`}}
-    } else if (text == ">" && around.name == "JSXIdentifier") {
-      if (around.parent?.lastChild?.name != "JSXEndTag" && (name = elementName(state.doc, around.parent, head)))
-        return {range: EditorSelection.cursor(head + 1), changes: {from: head, insert: `></${name}>`}}
     } else if (text == "/" && around.name == "JSXFragmentTag") {
       let empty = around.parent, base = empty?.parent
-      if (empty!.from == head - 1 && base!.lastChild?.name != "JSXEndTag" && (name = elementName(state.doc, base?.firstChild, head))) {
+      if (empty!.from == head - 1 && base!.lastChild?.name != "JSXEndTag" &&
+          (name = elementName(state.doc, base?.firstChild, head))) {
         let insert = `/${name}>`
         return {range: EditorSelection.cursor(head + insert.length), changes: {from: head, insert}}
       }
+    } else if (text == ">") {
+      let openTag = findOpenTag(around)
+      if (openTag && openTag.lastChild?.name != "JSXEndTag" &&
+          state.sliceDoc(head, head + 2) != "</" &&
+          (name = elementName(state.doc, openTag, head)))
+        return {range: EditorSelection.cursor(head + 1), changes: {from: head, insert: `></${name}>`}}
     }
     return {range}
   })
