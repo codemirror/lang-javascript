@@ -1,3 +1,9 @@
+## 6.1.2 (2022-12-07)
+
+### Bug fixes
+
+Automatic tag closing in JSX now works for namespaced and member-expression tag names.
+
 ## 6.1.1 (2022-10-24)
 
 ### Bug fixes
