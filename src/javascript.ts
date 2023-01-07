@@ -63,7 +63,7 @@ export const jsxLanguage = javascriptLanguage.configure({dialect: "jsx"})
 /// Language provider for JSX + TypeScript.
 export const tsxLanguage = javascriptLanguage.configure({dialect: "jsx ts"}, "typescript")
 
-const keywords = "break case const continue default delete export extends false finally in instanceof let new return static super switch this throw true typeof var yield".split(" ").map(kw => ({label: kw, type: "keyword"}))
+const keywords = "break case const continue default delete export extends false finally in instanceof let new return static super switch this throw true typeof undefined var yield".split(" ").map(kw => ({label: kw, type: "keyword"}))
 
 /// JavaScript support. Includes [snippet](#lang-javascript.snippets)
 /// completion.
