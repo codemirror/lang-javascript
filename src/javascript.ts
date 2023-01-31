@@ -111,7 +111,7 @@ export const autoCloseTags = EditorView.inputHandler.of((view, from, to, text) =
     let {head} = range, around = syntaxTree(state).resolveInner(head, -1), name
     if (around.name == "JSXStartTag") around = around.parent!
     if (text == ">" && around.name == "JSXFragmentTag") {
-      return {range: EditorSelection.cursor(head + 1), changes: {from: head, insert: `><>`}}
+      return {range: EditorSelection.cursor(head + 1), changes: {from: head, insert: `></>`}}
     } else if (text == "/" && around.name == "JSXFragmentTag") {
       let empty = around.parent, base = empty?.parent
       if (empty!.from == head - 1 && base!.lastChild?.name != "JSXEndTag" &&
