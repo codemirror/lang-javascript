@@ -1,3 +1,9 @@
+## 6.1.3 (2023-02-02)
+
+### Bug fixes
+
+Fix auto-closing of JSX fragments.
+
 ## 6.1.2 (2022-12-07)
 
 ### Bug fixes
