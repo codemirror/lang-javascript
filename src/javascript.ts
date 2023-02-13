@@ -1,6 +1,6 @@
 import {parser} from "@lezer/javascript"
 import {SyntaxNode} from "@lezer/common"
-import {LRLanguage, LanguageSupport,
+import {LRLanguage, LanguageSupport, Sublanguage, sublanguageProp, defineLanguageFacet,
         delimitedIndent, flatIndent, continuedIndent, indentNodeProp,
         foldNodeProp, foldInside, syntaxTree} from "@codemirror/language"
 import {EditorSelection, Text} from "@codemirror/state"
@@ -54,14 +54,25 @@ export const javascriptLanguage = LRLanguage.define({
   }
 })
 
+const jsxSublanguage: Sublanguage = {
+  test: node => /^JSX/.test(node.name),
+  facet: defineLanguageFacet({commentTokens: {block: {open: "{/*", close: "*/}"}}})
+}
+
 /// A language provider for TypeScript.
 export const typescriptLanguage = javascriptLanguage.configure({dialect: "ts"}, "typescript")
 
 /// Language provider for JSX.
-export const jsxLanguage = javascriptLanguage.configure({dialect: "jsx"})
+export const jsxLanguage = javascriptLanguage.configure({
+  dialect: "jsx",
+  props: [sublanguageProp.add(n => n.isTop ? [jsxSublanguage] : undefined)]
+})
 
 /// Language provider for JSX + TypeScript.
-export const tsxLanguage = javascriptLanguage.configure({dialect: "jsx ts"}, "typescript")
+export const tsxLanguage = javascriptLanguage.configure({
+  dialect: "jsx ts",
+  props: [sublanguageProp.add(n => n.isTop ? [jsxSublanguage] : undefined)]
+}, "typescript")
 
 const keywords = "break case const continue default delete export extends false finally in instanceof let new return static super switch this throw true typeof var yield".split(" ").map(kw => ({label: kw, type: "keyword"}))
 
