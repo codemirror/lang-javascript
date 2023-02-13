@@ -1,3 +1,9 @@
+## 6.1.4 (2023-02-13)
+
+### Bug fixes
+
+Make sure code in JSX context can be commented correctly.
+
 ## 6.1.3 (2023-02-02)
 
 ### Bug fixes
