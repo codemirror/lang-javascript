@@ -1,4 +1,4 @@
-<!-- NOTE: README.md is generated from src/README.md -->
+12344<!-- NOTE: README.md is generated from src/README.md -->
 
 # @codemirror/lang-javascript [![NPM version](https://img.shields.io/npm/v/@codemirror/lang-javascript.svg)](https://www.npmjs.org/package/@codemirror/lang-javascript)
 
