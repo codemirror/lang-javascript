@@ -41,7 +41,7 @@ export const javascriptLanguage = LRLanguage.define({
         }
       }),
       foldNodeProp.add({
-        "Block ClassBody SwitchBody EnumBody ObjectExpression ArrayExpression": foldInside,
+        "Block ClassBody SwitchBody EnumBody ObjectExpression ArrayExpression ObjectType": foldInside,
         BlockComment(tree) { return {from: tree.from + 2, to: tree.to - 2} }
       })
     ]
