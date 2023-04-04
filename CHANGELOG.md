@@ -1,3 +1,9 @@
+## 6.1.5 (2023-04-04)
+
+### Bug fixes
+
+Make TypeScript object type syntax foldable.
+
 ## 6.1.4 (2023-02-13)
 
 ### Bug fixes
