@@ -94,6 +94,7 @@ export function javascript(config: {jsx?: boolean, typescript?: boolean} = {}) {
 
 function findOpenTag(node: SyntaxNode) {
   for (;;) {
+    if (node.name == "ArrowFunction") return null
     if (node.name == "JSXOpenTag" || node.name == "JSXSelfClosingTag" || node.name == "JSXFragmentTag") return node
     if (!node.parent) return null
     node = node.parent
