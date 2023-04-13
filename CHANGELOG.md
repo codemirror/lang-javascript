@@ -1,3 +1,9 @@
+## 6.1.6 (2023-04-13)
+
+### Bug fixes
+
+Fix a bug that allowed `autoCloseTags` to close JSX tags in JavaScript context.
+
 ## 6.1.5 (2023-04-04)
 
 ### Bug fixes
