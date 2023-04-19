@@ -109,6 +109,10 @@ function elementName(doc: Text, tree: SyntaxNode | null | undefined, max = doc.l
   return ""
 }
 
+function isEndTag(node: SyntaxNode | null) {
+  return node && (node.name == "JSXEndTag" || node.name == "JSXSelfCloseEndTag")
+}
+
 const android = typeof navigator == "object" && /Android\b/.test(navigator.userAgent)
 
 /// Extension that will automatically insert JSX close tags when a `>` or
@@ -121,7 +125,9 @@ export const autoCloseTags = EditorView.inputHandler.of((view, from, to, text) =
   let changes = state.changeByRange(range => {
     let {head} = range, around = syntaxTree(state).resolveInner(head, -1), name
     if (around.name == "JSXStartTag") around = around.parent!
-    if (text == ">" && around.name == "JSXFragmentTag") {
+    if (around.name == "JSXAttributeValue" && around.to > head) {
+      // Ignore input inside attribute
+    } else if (text == ">" && around.name == "JSXFragmentTag") {
       return {range: EditorSelection.cursor(head + 1), changes: {from: head, insert: `></>`}}
     } else if (text == "/" && around.name == "JSXFragmentTag") {
       let empty = around.parent, base = empty?.parent
@@ -132,7 +138,7 @@ export const autoCloseTags = EditorView.inputHandler.of((view, from, to, text) =
       }
     } else if (text == ">") {
       let openTag = findOpenTag(around)
-      if (openTag && openTag.lastChild?.name != "JSXEndTag" &&
+      if (openTag && !isEndTag(openTag.lastChild) &&
           state.sliceDoc(head, head + 2) != "</" &&
           (name = elementName(state.doc, openTag, head)))
         return {range: EditorSelection.cursor(head + 1), changes: {from: head, insert: `></${name}>`}}
