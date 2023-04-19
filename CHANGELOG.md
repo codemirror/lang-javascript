@@ -1,3 +1,9 @@
+## 6.1.7 (2023-04-19)
+
+### Bug fixes
+
+Fix overeager JSX tag closing inside attribute values and in self-closing tags.
+
 ## 6.1.6 (2023-04-13)
 
 ### Bug fixes
