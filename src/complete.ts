@@ -67,7 +67,8 @@ export const dontComplete = [
   "LineComment", "BlockComment",
   "VariableDefinition", "TypeDefinition", "Label",
   "PropertyDefinition", "PropertyName",
-  "PrivatePropertyDefinition", "PrivatePropertyName"
+  "PrivatePropertyDefinition", "PrivatePropertyName",
+  ".", "?."
 ]
 
 /// Completion source that looks up locally defined names in
@@ -118,12 +119,12 @@ export function completionPath(context: CompletionContext): {path: readonly stri
   let inner = syntaxTree(context.state).resolveInner(context.pos, -1)
   if (inner.name == "PropertyName") {
     return pathFor(read, inner.parent!, read(inner))
+  } else if ((inner.name == "." || inner.name == "?.") && inner.parent!.name == "MemberExpression") {
+    return pathFor(read, inner.parent!, "")
   } else if (dontComplete.indexOf(inner.name) > -1) {
     return null
   } else if (inner.name == "VariableName" || inner.to - inner.from < 20 && Identifier.test(read(inner))) {
     return {path: [], name: read(inner)}
-  } else if ((inner.name == "." || inner.name == "?.") && inner.parent!.name == "MemberExpression") {
-    return pathFor(read, inner.parent!, "")
   } else if (inner.name == "MemberExpression") {
     return pathFor(read, inner, "")
   } else {
