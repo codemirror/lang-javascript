@@ -35,7 +35,7 @@
     "@lezer/javascript": "^1.0.0"
   },
   "devDependencies": {
-    "@codemirror/buildhelper": "^0.1.5",
+    "@codemirror/buildhelper": "^1.0.0",
     "@lezer/lr": "^1.0.0"
   },
   "repository": {
