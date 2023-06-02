@@ -1,3 +1,9 @@
+## 6.1.9 (2023-06-02)
+
+### Bug fixes
+
+Make sure `scopeCompletionSource` doesn't try to complete property names that aren't simple identifier (such as numeric indices).
+
 ## 6.1.8 (2023-05-13)
 
 ### Bug fixes
