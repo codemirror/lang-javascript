@@ -136,7 +136,7 @@ function enumeratePropertyCompletions(obj: any, top: boolean): readonly Completi
   let options = [], seen: Set<string> = new Set
   for (let depth = 0;; depth++) {
     for (let name of (Object.getOwnPropertyNames || Object.keys)(obj)) {
-      if (!/^[a-zA-Z_$][\w$]*$/.test(name) || seen.has(name)) continue
+      if (!/^[a-zA-Z_$\xaa-\uffdc][\w$\xaa-\uffdc]*$/.test(name) || seen.has(name)) continue
       seen.add(name)
       let value
       try { value = obj[name] }
