@@ -74,7 +74,7 @@ export const tsxLanguage = javascriptLanguage.configure({
   props: [sublanguageProp.add(n => n.isTop ? [jsxSublanguage] : undefined)]
 }, "typescript")
 
-const keywords = "break case const continue default delete export extends false finally in instanceof let new return static super switch this throw true typeof var yield".split(" ").map(kw => ({label: kw, type: "keyword"}))
+const keywords = "break case const continue default delete enum export extends false finally implements in instanceof interface let new package private protected public return static super switch this throw true type typeof var yield".split(" ").map(kw => ({label: kw, type: "keyword"}))
 
 /// JavaScript support. Includes [snippet](#lang-javascript.snippets)
 /// completion.
