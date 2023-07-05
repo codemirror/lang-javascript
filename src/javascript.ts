@@ -6,7 +6,7 @@ import {LRLanguage, LanguageSupport, Sublanguage, sublanguageProp, defineLanguag
 import {EditorSelection, Text} from "@codemirror/state"
 import {EditorView} from "@codemirror/view"
 import {completeFromList, ifNotIn} from "@codemirror/autocomplete"
-import {snippets} from "./snippets"
+import {snippets, typescriptSnippets} from "./snippets"
 import {localCompletionSource, dontComplete} from "./complete"
 
 /// A language provider based on the [Lezer JavaScript
@@ -74,16 +74,20 @@ export const tsxLanguage = javascriptLanguage.configure({
   props: [sublanguageProp.add(n => n.isTop ? [jsxSublanguage] : undefined)]
 }, "typescript")
 
-const keywords = "break case const continue default delete export extends false finally in instanceof let new return static super switch this throw true typeof var yield".split(" ").map(kw => ({label: kw, type: "keyword"}))
+let kwCompletion = (name: string) => ({label: name, type: "keyword"})
+
+const keywords = "break case const continue default delete export extends false finally in instanceof let new return static super switch this throw true typeof var yield".split(" ").map(kwCompletion)
+const typescriptKeywords = keywords.concat(["declare", "implements", "private", "protected", "public"].map(kwCompletion))
 
 /// JavaScript support. Includes [snippet](#lang-javascript.snippets)
 /// completion.
 export function javascript(config: {jsx?: boolean, typescript?: boolean} = {}) {
   let lang = config.jsx ? (config.typescript ? tsxLanguage : jsxLanguage)
     : config.typescript ? typescriptLanguage : javascriptLanguage
+  let completions = config.typescript ? typescriptSnippets.concat(typescriptKeywords) : snippets.concat(keywords)
   return new LanguageSupport(lang, [
     javascriptLanguage.data.of({
-      autocomplete: ifNotIn(dontComplete, completeFromList(snippets.concat(keywords)))
+      autocomplete: ifNotIn(dontComplete, completeFromList(completions))
     }),
     javascriptLanguage.data.of({
       autocomplete: localCompletionSource

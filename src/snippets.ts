@@ -59,3 +59,23 @@ export const snippets: readonly Completion[] = [
     type: "keyword"
   })
 ]
+
+/// A collection of snippet completions for TypeScript. Includes the
+/// JavaScript [snippets](#lang-javascript.snippets).
+export const typescriptSnippets = snippets.concat([
+  snip("interface ${name} {\n\t${}\n}", {
+    label: "interface",
+    detail: "definition",
+    type: "keyword"
+  }),
+  snip("type ${name} = ${type}", {
+    label: "type",
+    detail: "definition",
+    type: "keyword"
+  }),
+  snip("enum ${name} {\n\t${}\n}", {
+    label: "enum",
+    detail: "definition",
+    type: "keyword"
+  })
+])
