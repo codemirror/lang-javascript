@@ -91,7 +91,7 @@ export function localCompletionSource(context: CompletionContext): CompletionRes
 }
 
 function pathFor(read: (node: SyntaxNode) => string, member: SyntaxNode, name: string) {
-  let path = []
+  let path: string[] = []
   for (;;) {
     let obj = member.firstChild, prop
     if (obj?.name == "VariableName") {
@@ -133,7 +133,7 @@ export function completionPath(context: CompletionContext): {path: readonly stri
 }
 
 function enumeratePropertyCompletions(obj: any, top: boolean): readonly Completion[] {
-  let options = [], seen: Set<string> = new Set
+  let options: Completion[] = [], seen: Set<string> = new Set
   for (let depth = 0;; depth++) {
     for (let name of (Object.getOwnPropertyNames || Object.keys)(obj)) {
       if (!/^[a-zA-Z_$\xaa-\uffdc][\w$\xaa-\uffdc]*$/.test(name) || seen.has(name)) continue
