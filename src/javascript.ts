@@ -77,7 +77,7 @@ export const tsxLanguage = javascriptLanguage.configure({
 let kwCompletion = (name: string) => ({label: name, type: "keyword"})
 
 const keywords = "break case const continue default delete export extends false finally in instanceof let new return static super switch this throw true typeof var yield".split(" ").map(kwCompletion)
-const typescriptKeywords = keywords.concat(["declare", "implements", "private", "protected", "public"].map(kwCompletion))
+const typescriptKeywords = keywords.concat(["declare", "implements", "private", "protected", "public", "satisfies"].map(kwCompletion))
 
 /// JavaScript support. Includes [snippet](#lang-javascript.snippets)
 /// completion.
