@@ -1,3 +1,9 @@
+## 6.2.0 (2023-08-26)
+
+### New features
+
+Export a `typescriptSnippets` array and include TypeScript keyword completions in the default support extension when in TypeScript mode.
+
 ## 6.1.9 (2023-06-02)
 
 ### Bug fixes
