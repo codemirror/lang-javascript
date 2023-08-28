@@ -113,44 +113,43 @@ function elementName(doc: Text, tree: SyntaxNode | null | undefined, max = doc.l
   return ""
 }
 
-function isEndTag(node: SyntaxNode | null) {
-  return node && (node.name == "JSXEndTag" || node.name == "JSXSelfCloseEndTag")
-}
-
 const android = typeof navigator == "object" && /Android\b/.test(navigator.userAgent)
 
 /// Extension that will automatically insert JSX close tags when a `>` or
 /// `/` is typed.
-export const autoCloseTags = EditorView.inputHandler.of((view, from, to, text) => {
+export const autoCloseTags = EditorView.inputHandler.of((view, from, to, text, defaultInsert) => {
   if ((android ? view.composing : view.compositionStarted) || view.state.readOnly ||
       from != to || (text != ">" && text != "/") ||
       !javascriptLanguage.isActiveAt(view.state, from, -1)) return false
-  let {state} = view
-  let changes = state.changeByRange(range => {
-    let {head} = range, around = syntaxTree(state).resolveInner(head, -1), name
+  let base = defaultInsert(), {state} = base
+  let closeTags = state.changeByRange(range => {
+    let {head} = range, around = syntaxTree(state).resolveInner(head - 1, -1), name
     if (around.name == "JSXStartTag") around = around.parent!
-    if (around.name == "JSXAttributeValue" && around.to > head) {
-      // Ignore input inside attribute
+    if (state.doc.sliceString(head - 1, head) != text || around.name == "JSXAttributeValue" && around.to > head) {
+      // Ignore input inside attribute or cases where the text wasn't actually inserted
     } else if (text == ">" && around.name == "JSXFragmentTag") {
-      return {range: EditorSelection.cursor(head + 1), changes: {from: head, insert: `></>`}}
-    } else if (text == "/" && around.name == "JSXFragmentTag") {
-      let empty = around.parent, base = empty?.parent
-      if (empty!.from == head - 1 && base!.lastChild?.name != "JSXEndTag" &&
-          (name = elementName(state.doc, base?.firstChild, head))) {
-        let insert = `/${name}>`
-        return {range: EditorSelection.cursor(head + insert.length), changes: {from: head, insert}}
+      return {range, changes: {from: head, insert: `</>`}}
+    } else if (text == "/" && around.name == "JSXStartCloseTag") {
+      let empty = around.parent!, base = empty.parent
+      if (base && empty.from == head - 2 &&
+          ((name = elementName(state.doc, base.firstChild, head)) || base.firstChild?.name == "JSXFragmentTag")) {
+        let insert = `${name}>`
+        return {range: EditorSelection.cursor(head + insert.length, -1), changes: {from: head, insert}}
       }
     } else if (text == ">") {
       let openTag = findOpenTag(around)
-      if (openTag && !isEndTag(openTag.lastChild) &&
-          state.sliceDoc(head, head + 2) != "</" &&
+      if (openTag &&
+          !/^\/?>|^<\//.test(state.doc.sliceString(head, head + 2)) &&
           (name = elementName(state.doc, openTag, head)))
-        return {range: EditorSelection.cursor(head + 1), changes: {from: head, insert: `></${name}>`}}
+        return {range, changes: {from: head, insert: `</${name}>`}}
     }
     return {range}
   })
-  if (changes.changes.empty) return false
-  view.dispatch(changes, {userEvent: "input.type", scrollIntoView: true})
+  if (closeTags.changes.empty) return false
+  view.dispatch([
+    base,
+    state.update(closeTags, {userEvent: "input.complete", scrollIntoView: true})
+  ])
   return true
 });
 
