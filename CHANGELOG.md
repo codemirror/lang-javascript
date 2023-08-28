@@ -1,3 +1,9 @@
+## 6.2.1 (2023-08-28)
+
+### Bug fixes
+
+`autoCloseTags` now generates two separate transactions, so that the completion can be undone separately.
+
 ## 6.2.0 (2023-08-26)
 
 ### New features
