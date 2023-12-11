@@ -30,6 +30,7 @@ to communication around the project.
 @autoCloseTags
 
 @snippets
+@typescriptSnippets
 @localCompletionSource
 @completionPath
 @scopeCompletionSource

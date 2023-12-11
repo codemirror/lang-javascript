@@ -62,6 +62,12 @@ highlighting and indentation information.</p>
 <dd><p>A collection of JavaScript-related
 <a href="https://codemirror.net/docs/ref/#autocomplete.snippet">snippets</a>.</p>
 </dd>
+<dt id="user-content-typescriptsnippets">
+  <code><strong><a href="#user-content-typescriptsnippets">typescriptSnippets</a></strong>: <a href="https://codemirror.net/docs/ref#autocomplete.Completion">Completion</a>[]</code></dt>
+
+<dd><p>A collection of snippet completions for TypeScript. Includes the
+JavaScript <a href="#user-content-snippets">snippets</a>.</p>
+</dd>
 <dt id="user-content-localcompletionsource">
   <code><strong><a href="#user-content-localcompletionsource">localCompletionSource</a></strong>(<a id="user-content-localcompletionsource^context" href="#user-content-localcompletionsource^context">context</a>: <a href="https://codemirror.net/docs/ref#autocomplete.CompletionContext">CompletionContext</a>) → <a href="https://codemirror.net/docs/ref#autocomplete.CompletionResult">CompletionResult</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></code></dt>
 
