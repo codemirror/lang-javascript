@@ -80,7 +80,7 @@ const keywords = "break case const continue default delete export extends false 
 const typescriptKeywords = keywords.concat(["declare", "implements", "private", "protected", "public"].map(kwCompletion))
 
 /// JavaScript support. Includes [snippet](#lang-javascript.snippets)
-/// completion.
+/// and local variable completion.
 export function javascript(config: {jsx?: boolean, typescript?: boolean} = {}) {
   let lang = config.jsx ? (config.typescript ? tsxLanguage : jsxLanguage)
     : config.typescript ? typescriptLanguage : javascriptLanguage
