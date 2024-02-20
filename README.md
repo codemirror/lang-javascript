@@ -26,7 +26,7 @@ to communication around the project.
   <code><strong><a href="#user-content-javascript">javascript</a></strong>(<a id="user-content-javascript^config" href="#user-content-javascript^config">config</a>&#8288;?: {jsx&#8288;?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, typescript&#8288;?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>} = {}) → <a href="https://codemirror.net/docs/ref#language.LanguageSupport">LanguageSupport</a></code></dt>
 
 <dd><p>JavaScript support. Includes <a href="#user-content-snippets">snippet</a>
-completion.</p>
+and local variable completion.</p>
 </dd>
 <dt id="user-content-javascriptlanguage">
   <code><strong><a href="#user-content-javascriptlanguage">javascriptLanguage</a></strong>: <a href="https://codemirror.net/docs/ref#language.LRLanguage">LRLanguage</a></code></dt>
