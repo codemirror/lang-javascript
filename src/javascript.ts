@@ -138,7 +138,7 @@ export const autoCloseTags = EditorView.inputHandler.of((view, from, to, text, d
       }
     } else if (text == ">") {
       let openTag = findOpenTag(around)
-      if (openTag &&
+      if (openTag && openTag.name == "JSXOpenTag" &&
           !/^\/?>|^<\//.test(state.doc.sliceString(head, head + 2)) &&
           (name = elementName(state.doc, openTag, head)))
         return {range, changes: {from: head, insert: `</${name}>`}}
