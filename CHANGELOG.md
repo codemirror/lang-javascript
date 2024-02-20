@@ -1,3 +1,9 @@
+## 6.2.2 (2024-02-20)
+
+### Bug fixes
+
+Fix a bug that would cause self-closing JSX tags to have another closing tag inserted when typing the final '>'.
+
 ## 6.2.1 (2023-08-28)
 
 ### Bug fixes

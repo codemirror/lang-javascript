@@ -1,6 +1,6 @@
 {
   "name": "@codemirror/lang-javascript",
-  "version": "6.2.1",
+  "version": "6.2.2",
   "description": "JavaScript language support for the CodeMirror code editor",
   "scripts": {
     "test": "cm-runtests",
