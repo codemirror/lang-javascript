@@ -68,6 +68,7 @@ export const dontComplete = [
   "VariableDefinition", "TypeDefinition", "Label",
   "PropertyDefinition", "PropertyName",
   "PrivatePropertyDefinition", "PrivatePropertyName",
+  "JSXText", "JSXAttributeValue", "JSXOpenTag", "JSXCloseTag", "JSXSelfClosingTag",
   ".", "?."
 ]
 
