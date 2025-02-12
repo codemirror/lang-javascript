@@ -1,3 +1,9 @@
+## 6.2.3 (2025-02-12)
+
+### Bug fixes
+
+Disable JavaScript completions in JSX context.
+
 ## 6.2.2 (2024-02-20)
 
 ### Bug fixes
