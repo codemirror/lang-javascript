@@ -23,7 +23,7 @@ export function esLint(eslint: any, config?: any) {
       rules: {}
     }
     eslint.getRules().forEach((desc: any, name: string) => {
-      if (desc.meta.docs.recommended) config.rules[name] = 2
+      if (desc.meta.docs?.recommended) config.rules[name] = 2
     })
   }
 
