@@ -1,3 +1,11 @@
+## 6.2.4 (2025-05-14)
+
+### Bug fixes
+
+Fix a crash in the `esLint` helper when a rule's `meta.docs` isn't defined.
+
+Properly dedent lines starting with an opening curly brace below composite statements like `for`/`while`.
+
 ## 6.2.3 (2025-02-12)
 
 ### Bug fixes
