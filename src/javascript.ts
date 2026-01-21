@@ -42,6 +42,15 @@ export const javascriptLanguage = LRLanguage.define({
       }),
       foldNodeProp.add({
         "Block ClassBody SwitchBody EnumBody ObjectExpression ArrayExpression ObjectType": foldInside,
+        JSXElement(node) {
+          const first = node.firstChild;
+          const start = first?.firstChild ? first.firstChild.nextSibling : null;
+          const end = first?.name === 'JSXSelfClosingTag' ? first.lastChild : node.lastChild;
+
+          if (!start || !end) return null;
+
+          return start && start.to < end.from ? { from: start.to, to: end.type.isError ? node.to : end.from } : null;
+        },
         BlockComment(tree) { return {from: tree.from + 2, to: tree.to - 2} }
       })
     ]
