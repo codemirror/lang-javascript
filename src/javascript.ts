@@ -42,7 +42,18 @@ export const javascriptLanguage = LRLanguage.define({
       }),
       foldNodeProp.add({
         "Block ClassBody SwitchBody EnumBody ObjectExpression ArrayExpression ObjectType": foldInside,
-        BlockComment(tree) { return {from: tree.from + 2, to: tree.to - 2} }
+        BlockComment(tree) { return {from: tree.from + 2, to: tree.to - 2} },
+        JSXElement(tree) {
+          let open = tree.firstChild
+          if (!open || open.name == "JSXSelfClosingTag") return null
+          let close = tree.lastChild!
+          return {from: open.to, to: close.type.isError ? tree.to : close.from}
+        },
+        "JSXSelfClosingTag JSXOpenTag"(tree) {
+          let name = tree.firstChild?.nextSibling, close = tree.lastChild!
+          if (!name || name.type.isError) return null
+          return {from: name.to, to: close.type.isError ? tree.to : close.from}
+        }
       })
     ]
   }),
@@ -151,5 +162,5 @@ export const autoCloseTags = EditorView.inputHandler.of((view, from, to, text, d
     state.update(closeTags, {userEvent: "input.complete", scrollIntoView: true})
   ])
   return true
-});
+})
 
