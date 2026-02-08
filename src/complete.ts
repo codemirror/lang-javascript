@@ -134,13 +134,14 @@ export function completionPath(context: CompletionContext): {path: readonly stri
 }
 
 function enumeratePropertyCompletions(obj: any, top: boolean): readonly Completion[] {
+  let originalObj = obj
   let options: Completion[] = [], seen: Set<string> = new Set
   for (let depth = 0;; depth++) {
     for (let name of (Object.getOwnPropertyNames || Object.keys)(obj)) {
       if (!/^[a-zA-Z_$\xaa-\uffdc][\w$\xaa-\uffdc]*$/.test(name) || seen.has(name)) continue
       seen.add(name)
       let value
-      try { value = obj[name] }
+      try { value = originalObj[name] }
       catch(_) { continue }
       options.push({
         label: name,
