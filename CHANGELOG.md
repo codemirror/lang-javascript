@@ -1,3 +1,11 @@
+## 6.2.5 (2026-03-02)
+
+### Bug fixes
+
+Support code folding of JSX elements and tags.
+
+When reading properties in `scopeCompletionSource`, use the original object, not a prototype.
+
 ## 6.2.4 (2025-05-14)
 
 ### Bug fixes
