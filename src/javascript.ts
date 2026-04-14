@@ -10,7 +10,7 @@ import {snippets, typescriptSnippets} from "./snippets"
 import {localCompletionSource, dontComplete} from "./complete"
 
 /// A language provider based on the [Lezer JavaScript
-/// parser](https://github.com/lezer-parser/javascript), extended with
+/// parser](https://code.haverbeke.berlin/lezer/javascript), extended with
 /// highlighting and indentation information.
 export const javascriptLanguage = LRLanguage.define({
   name: "javascript",
