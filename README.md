@@ -1,3 +1,5 @@
+**This repository has moved to https://code.haverbeke.berlin/codemirror/lang-javascript**
+
 <!-- NOTE: README.md is generated from src/README.md -->
 
 # @codemirror/lang-javascript [![NPM version](https://img.shields.io/npm/v/@codemirror/lang-javascript.svg)](https://www.npmjs.org/package/@codemirror/lang-javascript)
